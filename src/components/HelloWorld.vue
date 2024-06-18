@@ -1,14 +1,21 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { getCurrentInstance } from 'vue'
+
+const instance = getCurrentInstance()
+const $dateFns = instance?.appContext.config.globalProperties.$dateFns
 
 defineProps<{ msg: string }>()
 
 const count = ref(0)
+
+const currentDate = new Date()
+
 </script>
 
 <template>
   <h1>{{ msg }}</h1>
-
+  <h4>Current date: {{ $dateFns.format(currentDate, 'yyyy-MM-dd') }}</h4>
   <div class="card">
     <button type="button" @click="count++">count is {{ count }}</button>
     <p>
