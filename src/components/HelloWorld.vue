@@ -5,6 +5,10 @@ import { getCurrentInstance } from 'vue'
 const instance = getCurrentInstance()
 const $dateFns = instance?.appContext.config.globalProperties.$dateFns
 
+const $vueuse = instance?.appContext.config.globalProperties.$vueuse
+
+const mouse = $vueuse.useMouse()
+
 defineProps<{ msg: string }>()
 
 const count = ref(0)
@@ -15,7 +19,15 @@ const currentDate = new Date()
 
 <template>
   <h1>{{ msg }}</h1>
+
   <h4>Current date: {{ $dateFns.format(currentDate, 'yyyy-MM-dd') }}</h4>
+
+
+  <div>
+    <p>Mouse position: {{ mouse.x }}, {{ mouse.y }}</p>
+  </div>
+
+
   <div class="card">
     <button type="button" @click="count++">count is {{ count }}</button>
     <p>
